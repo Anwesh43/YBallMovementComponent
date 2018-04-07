@@ -24,7 +24,7 @@ class YBallMovementComponent extends HTMLElement {
 
 class State {
     constructor() {
-        this.scales = [0,0]
+        this.scales = [0,0,0]
         this.prevScale = 0
         this.dir = 0
         this.j = 0
@@ -77,7 +77,7 @@ class YBallMovement {
     draw(context) {
         const x = w/2, y = h/2, l = Math.min(w,h)/3, r = l/10, updatedL = l * (1 -this.state.scales[0])
         context.save()
-        context.translate(w/2, h/2)
+        context.translate(w/2, h/2 + (h/2 + 2 * r) * this.state.scales[2])
         context.scale(1 + this.state.scales[1], 1 + this.state.scales[1])
         for(var i = 0; i < 3 - 2 * Math.floor(this.state.scales[0]); i++) {
             context.save()
