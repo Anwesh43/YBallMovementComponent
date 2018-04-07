@@ -21,3 +21,4 @@ class YBallMovementComponent extends HTMLElement {
         this.render()
     }
 }
+customElements.define('yball-movement', YBallMovementComponent)
