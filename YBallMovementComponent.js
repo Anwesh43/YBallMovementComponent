@@ -1,4 +1,4 @@
-const w = window.innerWidth, h = window.innerHeight
+const w = window.innerWidth, h = window.innerHeight, color = "#f1c40f"
 class YBallMovementComponent extends HTMLElement {
     constructor() {
         super()
@@ -15,6 +15,10 @@ class YBallMovementComponent extends HTMLElement {
         canvas.height = h
         const context = canvas.getContext('2d')
         context.fillStyle = '#212121'
+        context.strokeStyle = color
+        context.fillStyle = color
+        context.lineWidth = Math.min(w, h)/60
+        context.lineCap = 'round'
         context.fillRect(0, 0, w, h)
         this.img.src = canvas.toDataURL()
     }
