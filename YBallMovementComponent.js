@@ -69,4 +69,38 @@ class Animator {
         }
     }
 }
+
+class YBallMovement {
+    constructor() {
+        this.state = new State()
+    }
+    draw(context) {
+        const x = w/2, y = h/2, l = Math.min(w,h)/3, r = l/10, updatedL = l * (1 -this.state.scales[0])
+        context.save()
+        context.translate(w/2, h/2)
+        context.scale(1 + this.state.scales[1], 1 + this.state.scales[1])
+        for(var i = 0; i < 3 - 2 * Math.floor(this.state.scales[0]); i++) {
+            context.save()
+            context.rotate(-Math.PI/6 + (2 * Math.PI/3) * i)
+            context.beginPath()
+            context.moveTo(0, 0)
+            context.lineTo(updatedL, 0)
+            context.stroke()
+            context.save()
+            context.translate(updatedL, 0)
+            context.arc(0, 0, r, 0, 2 * Math.PI)
+            context.fill()
+            context.restore()
+            context.restore()
+        }
+        context.restore()
+    }
+    update(stopcb) {
+        this.state.update(stopcb)
+    }
+    startUpdating(startcb) {
+        this.state.startUpdating(startcb)
+    }
+}
+
 customElements.define('yball-movement', YBallMovementComponent)
