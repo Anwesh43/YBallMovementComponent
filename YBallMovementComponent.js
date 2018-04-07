@@ -5,6 +5,8 @@ class YBallMovementComponent extends HTMLElement {
         this.img = document.createElement('img')
         const shadow = this.attachShadow({mode:'open'})
         shadow.appendChild(this.img)
+        this.animator = new Animator()
+        this.yBallMovment = new YBallMovement()
     }
 
     render() {
@@ -19,6 +21,16 @@ class YBallMovementComponent extends HTMLElement {
 
     connectedCallback() {
         this.render()
+        this.img.onmousedown = () => {
+            this.yBallMovement.startUpdating(() => {
+                this.animator.start(() => {
+                    this.render()
+                    this.yBallMovement.update(() => {
+                        this.animator.stop()
+                    })
+                })
+            })
+        }
     }
 }
 
