@@ -6,7 +6,7 @@ class YBallMovementComponent extends HTMLElement {
         const shadow = this.attachShadow({mode:'open'})
         shadow.appendChild(this.img)
         this.animator = new Animator()
-        this.yBallMovment = new YBallMovement()
+        this.yBallMovement = new YBallMovement()
     }
 
     render() {
@@ -16,10 +16,11 @@ class YBallMovementComponent extends HTMLElement {
         const context = canvas.getContext('2d')
         context.fillStyle = '#212121'
         context.strokeStyle = color
-        context.fillStyle = color
         context.lineWidth = Math.min(w, h)/60
         context.lineCap = 'round'
         context.fillRect(0, 0, w, h)
+        context.fillStyle = color
+        this.yBallMovement.draw(context)
         this.img.src = canvas.toDataURL()
     }
 
